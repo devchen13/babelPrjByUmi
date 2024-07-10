@@ -34,7 +34,7 @@ export default () => {
       }
       // 关键字
       if (path.node.kind === "const") {
-        path.node.kind = "varr";
+        path.node.kind = "var";
       }
     },
   });
@@ -45,6 +45,10 @@ export default () => {
     ast,
     {
       /* options */
+      // comments: 是否保留注释。
+      // compact: 是否生成紧凑的代码，去除不必要的空格和换行。
+      // minified: 是否生成最小化的代码。
+      // sourceMaps: 是否生成 Source Map。
     }
     // code
   );
@@ -54,6 +58,7 @@ export default () => {
   // 方法2
 
   let result = babel.transform(codeStr, {
+    // presets: ['es2015'],
     plugins: ["transform-arrow-functions", "transform-classes"],
   });
   console.log("转换前：", result);
