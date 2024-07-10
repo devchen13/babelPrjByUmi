@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "author": "chenbin <chenbin@qince.com>",
+  "scripts": {
+    "dev": "umi dev",
+    "build": "umi build",
+    "postinstall": "umi setup",
+    "setup": "umi setup",
+    "start": "npm run dev"
+  },
+  "dependencies": {
+    "@babel/core": "^7.24.7",
+    "@babel/generator": "^7.24.7",
+    "@babel/parser": "^7.24.7",
+    "@babel/plugin-transform-arrow-functions": "^7.24.7",
+    "@babel/plugin-transform-classes": "^7.24.7",
+    "@babel/standalone": "^7.24.7",
+    "@babel/traverse": "^7.24.7",
+    "umi": "^4.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.33",
+    "@types/react-dom": "^18.0.11",
+    "typescript": "^5.0.3"
+  }
+}
