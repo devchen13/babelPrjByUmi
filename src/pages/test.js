@@ -1,4 +1,5 @@
-import { packages, transform, transformFromAst } from "@babel/standalone";
+// import { packages, transform, transformFromAst } from "@babel/standalone";
+import { packages, transform, transformFromAst } from "./babel";
 
 export default () => {
   const { parser, traverse, generator } = packages;
