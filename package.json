@@ -1,6 +1,6 @@
 {
   "private": true,
-  "author": "chenbin <chenbin@qince.com>",
+  "author": "cc <cc@qq.com>",
   "scripts": {
     "dev": "umi dev",
     "build": "umi build",
