@@ -6,7 +6,11 @@
     "build": "umi build",
     "postinstall": "umi setup",
     "setup": "umi setup",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,less,scss,md}\"",
+    "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,less,scss,md}\""
   },
   "dependencies": {
     "@babel/core": "^7.24.7",
@@ -17,12 +21,15 @@
     "@babel/standalone": "^7.24.7",
     "@babel/traverse": "^7.24.7",
     "antd": "^5.22.6",
+    "axios": "^1.11.0",
     "dayjs": "^1.11.13",
     "umi": "^4.3.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
+    "@umijs/lint": "^4.4.12",
+    "prettier": "^3.6.2",
     "typescript": "^5.0.3"
   }
 }

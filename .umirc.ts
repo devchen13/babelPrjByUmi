@@ -1,9 +1,10 @@
-import { defineConfig } from "umi";
+import { defineConfig } from 'umi'
+import globalConfig from './GlobalConfig'
 
 export default defineConfig({
   routes: [
-    { path: "/", component: "index" },
-    { path: "/docs", component: "docs" },
+    { path: '/', component: 'index' },
+    { path: '/docs', component: 'docs' },
   ],
   npmClient: 'npm',
   alias: {
@@ -13,6 +14,16 @@ export default defineConfig({
     '@pages': require('path').resolve(__dirname, 'src/pages'),
     '@utils': require('path').resolve(__dirname, 'src/utils'),
     '@layouts': require('path').resolve(__dirname, 'src/layouts'),
-    '@constants': require('path').resolve(__dirname, 'src/constants')
+    '@constants': require('path').resolve(__dirname, 'src/constants'),
+    '@GlobalConfig': require('path').resolve(__dirname, 'GlobalConfig'),
   },
-});
+  proxy: {
+    '/api': {
+      target: globalConfig.baseUrl,
+      changeOrigin: true,
+      pathRewrite: {
+        '^/api': '/api',
+      },
+    },
+  },
+})

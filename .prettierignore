@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+.umi/
+.umi-production/
+
+# Cache
+.cache/
+.temp/
+.tmp/
+
+# Logs
+*.log
+
+# Package files
+package-lock.json
+yarn.lock
+
+# Generated files
+src/.umi/
+src/.umi-production/
+src/pages/.umi/
+src/pages/.umi-production/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
