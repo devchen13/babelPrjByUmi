@@ -22,7 +22,7 @@ export default defineConfig({
       target: globalConfig.baseUrl,
       changeOrigin: true,
       pathRewrite: {
-        '^/api': '/api',
+        '^/api': '',
       },
     },
   },

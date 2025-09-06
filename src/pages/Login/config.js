@@ -9,6 +9,7 @@ export const loginConfig = {
     Authorization: 'Bearer ' + 'token',
   },
   body: {
+    "type": "1", // 1：账号登录 2.手机号码登录
     target: globalConfig.baseUrl,
     tid: 'jctx',
     uid: 'c13',
