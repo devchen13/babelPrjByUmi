@@ -5,9 +5,8 @@
  * @returns {string} 补零后的二进制字符串
  */
 function decimalToBinaryString(num, length = 6) {
-    let bin = num.toString(2);
-    return bin.padStart(length, '0');
-  }
-  
-  export default decimalToBinaryString;
-  
+  let bin = num.toString(2)
+  return bin.padStart(length, '0')
+}
+
+export default decimalToBinaryString
