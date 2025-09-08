@@ -1,131 +1,48 @@
-import React, { useState } from 'react'
-import { Button, Form, Input, message } from 'antd'
-import loginUtils from './LoginUtils'
-import { loginConfig } from './config'
+import React from 'react'
+import { Button, Form, Input } from 'antd'
 
-const LoginForm = () => {
-  const [loading, setLoading] = useState(false)
+const LoginForm = (props) => {
+  const { onFinish, initialValues } = props
   const [form] = Form.useForm()
 
-  // 自动登录
-  const handleAutoLogin = async () => {
-    setLoading(true)
-    try {
-      const result = await loginUtils.autoLogin({ params: loginConfig })
-
-      if (result.success) {
-        message.success('自动登录成功！')
-        console.log('登录结果:', result)
-      } else {
-        message.error(`自动登录失败: ${result.error}`)
-      }
-    } catch (error) {
-      message.error(`登录异常: ${error.message}`)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  // 手动登录
-  const handleManualLogin = async (values) => {
-    setLoading(true)
-    try {
-      const result = await loginUtils.autoLogin({
-        params: {
-          target: loginConfig.target,
-          type: '1', // 账号登录
-          tid: values.tid,
-          uid: values.uid,
-          pwd: values.pwd,
-        },
-      })
-
-      if (result.success) {
-        message.success('登录成功！')
-        console.log('登录结果:', result)
-      } else {
-        message.error(`登录失败: ${result.error}`)
-      }
-    } catch (error) {
-      message.error(`登录异常: ${error.message}`)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  // 检查登录状态
-  const handleCheckStatus = async () => {
-    try {
-      const isLoggedIn = await loginUtils.checkLoginStatus(loginConfig.target)
-      message.info(isLoggedIn ? '已登录' : '未登录')
-    } catch (error) {
-      message.error(`检查状态失败: ${error.message}`)
-    }
-  }
-
+  /* 手动登录表单 */
   return (
-    <div style={{ padding: '20px', maxWidth: '400px' }}>
-      {/* 自动登录 */}
-      <div style={{ marginBottom: '20px' }}>
-        <Button
-          type='primary'
-          onClick={handleAutoLogin}
-          loading={loading}
-          block
-        >
-          自动登录（使用配置）
-        </Button>
-      </div>
-
-      {/* 手动登录表单 */}
-      <Form
-        form={form}
-        onFinish={handleManualLogin}
-        layout='vertical'
-        initialValues={{
-          tid: 'jctx',
-          uid: 'c13',
-          pwd: 'a888888',
-        }}
+    <Form
+      form={form}
+      onFinish={onFinish}
+      layout='vertical'
+      initialValues={initialValues}
+    >
+      <Form.Item
+        label='企业ID'
+        name='tid'
+        rules={[{ required: true, message: '请输入企业ID' }]}
       >
-        <Form.Item
-          label='企业ID'
-          name='tid'
-          rules={[{ required: true, message: '请输入企业ID' }]}
-        >
-          <Input placeholder='请输入企业ID' />
-        </Form.Item>
+        <Input placeholder='请输入企业ID' />
+      </Form.Item>
 
-        <Form.Item
-          label='用户名'
-          name='uid'
-          rules={[{ required: true, message: '请输入用户名' }]}
-        >
-          <Input placeholder='请输入用户名' />
-        </Form.Item>
+      <Form.Item
+        label='用户名'
+        name='uid'
+        rules={[{ required: true, message: '请输入用户名' }]}
+      >
+        <Input placeholder='请输入用户名' />
+      </Form.Item>
 
-        <Form.Item
-          label='密码'
-          name='pwd'
-          rules={[{ required: true, message: '请输入密码' }]}
-        >
-          <Input.Password placeholder='请输入密码' />
-        </Form.Item>
+      <Form.Item
+        label='密码'
+        name='pwd'
+        rules={[{ required: true, message: '请输入密码' }]}
+      >
+        <Input.Password placeholder='请输入密码' />
+      </Form.Item>
 
-        <Form.Item>
-          <Button type='primary' htmlType='submit' loading={loading} block>
-            手动登录
-          </Button>
-        </Form.Item>
-      </Form>
-
-      {/* 检查登录状态 */}
-      <div style={{ marginTop: '20px' }}>
-        <Button onClick={handleCheckStatus} block>
-          检查登录状态
+      <Form.Item>
+        <Button type='primary' htmlType='submit' block>
+          手动登录
         </Button>
-      </div>
-    </div>
+      </Form.Item>
+    </Form>
   )
 }
 

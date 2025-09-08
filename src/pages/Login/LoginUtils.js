@@ -175,7 +175,7 @@ class LoginUtils {
         'identifiers.src': 'waiqin365',
         'identifiers.password': password,
         'identifiers.rsaType': rsaType,
-        'identifiers.verifyCode': '',
+        // 'identifiers.verifyCode': '',// 导致登录被验证码拦截住
         'identifiers.type': type,
         'identifiers.tenantname': tid,
         'identifiers.code': uid,
@@ -366,7 +366,7 @@ class LoginUtils {
         // 如果不是最后一次尝试，等待后重试
         if (i < maxRetries - 1) {
           console.log(`登录失败，${this.defaultConfig.retryDelay}ms后重试...`)
-          await new Promise(resolve =>
+          await new Promise((resolve) =>
             setTimeout(resolve, this.defaultConfig.retryDelay)
           )
         }
@@ -381,7 +381,7 @@ class LoginUtils {
         }
 
         // 等待后重试
-        await new Promise(resolve =>
+        await new Promise((resolve) =>
           setTimeout(resolve, this.defaultConfig.retryDelay)
         )
       }

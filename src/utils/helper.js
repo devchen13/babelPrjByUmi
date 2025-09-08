@@ -1,4 +1,79 @@
 import dayjs from 'dayjs'
+import qs from 'qs'
+
+/**
+ * 使用qs库获取Hash路由中的查询参数
+ * @param {string} paramName - 参数名称
+ * @returns {string|null} 参数值
+ */
+export const getHashParamWithQs = (paramName) => {
+  try {
+    const hash = window.location.hash
+    const queryString = hash.split('?')[1]
+    if (!queryString) return null
+
+    const params = qs.parse(queryString)
+    return params[paramName] || null
+  } catch (error) {
+    console.warn('使用qs解析Hash参数失败:', error.message)
+    return null
+  }
+}
+
+/**
+ * 使用qs库获取所有Hash路由中的查询参数
+ * @returns {Object} 参数对象
+ */
+export const getAllHashParamsWithQs = () => {
+  try {
+    const hash = window.location.hash
+    const queryString = hash.split('?')[1]
+    if (!queryString) return {}
+
+    return qs.parse(queryString)
+  } catch (error) {
+    console.warn('使用qs解析Hash参数失败:', error.message)
+    return {}
+  }
+}
+
+/**
+ * 使用qs库获取URL中的查询参数
+ * @param {string} paramName - 参数名称
+ * @param {string} url - 可选的URL，默认使用当前页面URL
+ * @returns {string|null} 参数值
+ */
+export const getUrlParamWithQs = (paramName, url = window.location.href) => {
+  try {
+    const urlObj = new URL(url)
+    const queryString = urlObj.search.substring(1) // 去掉开头的?
+    if (!queryString) return null
+
+    const params = qs.parse(queryString)
+    return params[paramName] || null
+  } catch (error) {
+    console.warn('使用qs解析URL参数失败:', error.message)
+    return null
+  }
+}
+
+/**
+ * 使用qs库获取所有URL查询参数
+ * @param {string} url - 可选的URL，默认使用当前页面URL
+ * @returns {Object} 参数对象
+ */
+export const getAllUrlParamsWithQs = (url = window.location.href) => {
+  try {
+    const urlObj = new URL(url)
+    const queryString = urlObj.search.substring(1) // 去掉开头的?
+    if (!queryString) return {}
+
+    return qs.parse(queryString)
+  } catch (error) {
+    console.warn('使用qs解析URL参数失败:', error.message)
+    return {}
+  }
+}
 
 /**
  * 十进制数值转为指定长度的二进制字符串，不足位数前面补0
