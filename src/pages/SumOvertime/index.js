@@ -8,7 +8,7 @@ const SumOvertime = () => {
   const defaultData = mockData
   const [data, setData] = useState(defaultData || [])
 
-  const handleSummaryDataChange = result => {
+  const handleSummaryDataChange = (result) => {
     try {
       if (result?.code === '1') {
         let overtimeHours = sumOvertimeTool(result.data)
@@ -30,7 +30,7 @@ const SumOvertime = () => {
     <div style={{ width: '100vw' }}>
       <Space.Compact>
         <Input
-          onChange={e => {
+          onChange={(e) => {
             try {
               const objList = JSON.parse(e.target.value || '[]')
               setData(objList)

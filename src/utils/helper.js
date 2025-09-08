@@ -11,10 +11,10 @@ export const decimalToBinaryString = (num, length = 6) => {
   return bin.padStart(length, '0')
 }
 
-export const sumOvertimeTool = list => {
+export const sumOvertimeTool = (list) => {
   const currentDay = dayjs().format('YYYY-MM-DD')
   let overtimeHours = 0
-  list?.forEach(item => {
+  list?.forEach((item) => {
     let offTime = item?.firstOffRgTime || ''
     if (offTime && item.isWorkingDays === '1') {
       const start = dayjs(`${currentDay} 18:30`)
