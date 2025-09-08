@@ -1,23 +1,17 @@
 import React from 'react'
-import { localGet, localPost } from '@utils/request'
+import { localPost } from '@utils/request'
 import { loginConfig } from './config'
 import loginUtils from './LoginUtils'
 import LoginForm from './LoginForm'
 
 const Login = () => {
   const handleClick = () => {
-    console.log('Login')
-    loginUtils.autoLogin({ params: loginConfig.body })
-    // localGet(`${loginConfig.host}${loginConfig.url}`, loginConfig.body, loginConfig.headers).then(
-    //   res => {
-    //     console.log(res)
-    //   }
-    // )
+    loginUtils.autoLogin({ params: loginConfig })
   }
   return (
     <div>
       <div onClick={handleClick}>
-        dddddddddddddddddddddddddddd
+        login-setCookie
         {/* <LoginForm /> */}
       </div>
       <div
@@ -25,9 +19,9 @@ const Login = () => {
           localPost('/api/app/apaas/group/list.do', { origin: '2' })
         }}
       >
-        cccccccccccccccccccccccccccc
-        {/* <LoginForm /> */}
+        getData
       </div>
+      <LoginForm />
     </div>
   )
 }

@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 
-import dayjs from 'dayjs'
 import { Input, Button, message, Space } from 'antd'
-import mockData from './mockData'
+import { sumOvertimeTool } from '@utils/helper'
 
-const SumOvertime = () => {
-  const defaultData = mockData
+const SumOvertime = (props) => {
+  const { defaultData = [] } = props
   const [data, setData] = useState(defaultData || [])
 
   const handleSummaryDataChange = (result) => {

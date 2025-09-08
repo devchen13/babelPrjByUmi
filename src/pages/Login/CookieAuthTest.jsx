@@ -24,11 +24,11 @@ const CookieAuthTest = () => {
     setLoading(true)
     try {
       const result = await encryptLogin({
-        target: loginConfig.body.target,
+        target: loginConfig.target,
         type: '1',
-        tid: loginConfig.body.tid,
-        uid: loginConfig.body.uid,
-        pwd: loginConfig.body.pwd,
+        tid: loginConfig.tid,
+        uid: loginConfig.uid,
+        pwd: loginConfig.pwd,
       })
 
       setLoginResult(result)
@@ -49,7 +49,7 @@ const CookieAuthTest = () => {
   // 测试认证请求
   const handleTestAuth = async () => {
     try {
-      const isLoggedIn = await checkLoginStatus(loginConfig.body.target)
+      const isLoggedIn = await checkLoginStatus(loginConfig.target)
       message.info(isLoggedIn ? '认证成功：已登录' : '认证失败：未登录')
     } catch (error) {
       message.error(`认证测试失败: ${error.message}`)
@@ -59,7 +59,7 @@ const CookieAuthTest = () => {
   // 登出
   const handleLogout = async () => {
     try {
-      const success = await logout(loginConfig.body.target)
+      const success = await logout(loginConfig.target)
       if (success) {
         message.success('登出成功！')
         updateAuthStatus() // 更新认证状态

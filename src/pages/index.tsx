@@ -4,6 +4,7 @@ import SumOvertime from './SumOvertime'
 import Gua from './Gua'
 import { Layout, Row } from 'antd'
 import Login from './Login'
+import mockData from './SumOvertime/mockData'
 
 export default function HomePage() {
   const aa = 1
@@ -11,7 +12,7 @@ export default function HomePage() {
     <Layout>
       <Login />
       <Row>
-        <SumOvertime />
+        <SumOvertime defaultData={mockData} />
       </Row>
       <Row>
         <Gua />

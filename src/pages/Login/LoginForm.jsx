@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Form, Input, message } from 'antd'
-import { autoLogin, encryptLogin, checkLoginStatus } from './LoginUtils'
+import loginUtils from './LoginUtils'
 import { loginConfig } from './config'
 
 const LoginForm = () => {
@@ -11,10 +11,7 @@ const LoginForm = () => {
   const handleAutoLogin = async () => {
     setLoading(true)
     try {
-      const result = await autoLogin({
-        params: loginConfig.body,
-        redirectUrl: 'https://cloud.waiqin365.com',
-      })
+      const result = await loginUtils.autoLogin({ params: loginConfig })
 
       if (result.success) {
         message.success('自动登录成功！')
@@ -30,15 +27,17 @@ const LoginForm = () => {
   }
 
   // 手动登录
-  const handleManualLogin = async values => {
+  const handleManualLogin = async (values) => {
     setLoading(true)
     try {
-      const result = await encryptLogin({
-        target: loginConfig.body.target,
-        type: '1', // 账号登录
-        tid: values.tid,
-        uid: values.uid,
-        pwd: values.pwd,
+      const result = await loginUtils.autoLogin({
+        params: {
+          target: loginConfig.target,
+          type: '1', // 账号登录
+          tid: values.tid,
+          uid: values.uid,
+          pwd: values.pwd,
+        },
       })
 
       if (result.success) {
@@ -57,7 +56,7 @@ const LoginForm = () => {
   // 检查登录状态
   const handleCheckStatus = async () => {
     try {
-      const isLoggedIn = await checkLoginStatus(loginConfig.body.target)
+      const isLoggedIn = await loginUtils.checkLoginStatus(loginConfig.target)
       message.info(isLoggedIn ? '已登录' : '未登录')
     } catch (error) {
       message.error(`检查状态失败: ${error.message}`)
@@ -66,8 +65,6 @@ const LoginForm = () => {
 
   return (
     <div style={{ padding: '20px', maxWidth: '400px' }}>
-      <h2>登录测试</h2>
-
       {/* 自动登录 */}
       <div style={{ marginBottom: '20px' }}>
         <Button
