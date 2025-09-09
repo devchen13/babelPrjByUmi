@@ -2,14 +2,13 @@ import React, { useState } from 'react'
 import { loginConfig } from './config'
 import loginUtils from './LoginUtils'
 import { getHashParamWithQs } from '@utils/helper'
-import { testProxyConnection } from '@utils/request'
 
 import { Button, message, Spin } from 'antd'
 import LoginForm from './LoginForm'
 
 const Login = () => {
   // 使用qs获取URL中的参数
-  const enableLogin = getHashParamWithQs('login') 
+  const enableLogin = getHashParamWithQs('login')
   const urlTarget = getHashParamWithQs('target') ?? loginConfig.target
   const urlType = getHashParamWithQs('type') ?? loginConfig.type
   const urlTid = getHashParamWithQs('tid') ?? loginConfig.tid
@@ -25,23 +24,6 @@ const Login = () => {
   }
 
   const [loading, setLoading] = useState(false)
-
-  // 测试代理连接
-  const handleTestConnection = async () => {
-    setLoading(true)
-    try {
-      const isConnected = await testProxyConnection()
-      if (isConnected) {
-        message.success('代理服务器连接正常')
-      } else {
-        message.error('代理服务器连接失败，请检查网络配置')
-      }
-    } catch (error) {
-      message.error(`连接测试失败: ${error.message}`)
-    } finally {
-      setLoading(false)
-    }
-  }
 
   // 自动登录
   const handleAutoLogin = async () => {
@@ -94,7 +76,7 @@ const Login = () => {
     }
   }
 
-  if(!enableLogin){
+  if (!enableLogin) {
     return null
   }
   return (
@@ -128,12 +110,6 @@ const Login = () => {
             </Button>
           </div>
 
-          {/* 测试连接 */}
-          <div style={{ marginBottom: '20px' }}>
-            <Button onClick={handleTestConnection} loading={loading} block>
-              测试代理连接
-            </Button>
-          </div>
           <LoginForm
             {...{
               onFinish: handleManualLogin,

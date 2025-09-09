@@ -1,31 +1,14 @@
 import axios from 'axios'
 import cookieManager from './cookieManager'
-import { getHashParamWithQs } from './helper'
 
-// 获取当前代理服务器地址
-const getCurrentProxyServer = () => {
-  // 从URL参数获取target作为服务器地址
-  const urlTarget = getHashParamWithQs('target')
-  return urlTarget || '' // 默认服务器
-}
-
-// 根据target自动决定协议
-const getProtocolFromTarget = (target) => {
-  if (!target) return 'http'
-
-  // 如果target已经包含协议，直接使用
-  if (target.startsWith('http://') || target.startsWith('https://')) {
-    return target
-  }
-
-  // 根据端口号或其他规则决定协议
-  // 这里可以根据实际需求调整规则
-  if (target.includes(':443') || target.includes(':8443')) {
-    return `https://${target}`
-  }
-
-  // 默认使用http
-  return `http://${target}`
+// Cookie管理配置
+const COOKIE_CONFIG = {
+  // 是否通过URL参数传递Cookie（用于特殊需求）
+  passCookieViaUrl: false,
+  // 是否启用withCredentials
+  withCredentials: true,
+  // Cookie参数名
+  cookieParamName: '_cookie',
 }
 
 // 动态创建axios实例
@@ -46,29 +29,22 @@ const AxiosRequest = createRequestInstance()
 // 请求拦截器
 AxiosRequest.interceptors.request.use(
   (config) => {
-    // 动态设置代理服务器
-    const currentServer = getCurrentProxyServer()
-    if (currentServer) {
-      // 根据target自动决定协议
-      const baseURL = getProtocolFromTarget(currentServer)
-      config.baseURL = baseURL
+    // 注意：浏览器不允许JavaScript直接设置Cookie请求头
+    // 使用withCredentials: true让浏览器自动处理Cookie
+    // 如果需要手动传递Cookie，可以通过URL参数或其他方式
 
-      // 如果有target参数，需要去掉/api前缀
-      if (config.url?.startsWith('/api/')) {
-        config.url = config.url.replace('/api', '')
-        console.log('去掉/api前缀后的URL:', config.url)
+    // 如果需要传递Cookie信息，可以通过URL参数（可选）
+    if (COOKIE_CONFIG.passCookieViaUrl) {
+      const cookieString = cookieManager.getCookieString()
+      if (cookieString && config.url) {
+        // 将Cookie信息作为URL参数传递（仅用于特殊需求）
+        const separator = config.url.includes('?') ? '&' : '?'
+        config.url += `${separator}${COOKIE_CONFIG.cookieParamName}=${encodeURIComponent(cookieString)}`
+        console.log('通过URL参数传递Cookie信息')
       }
-
-      console.log('使用代理服务器:', baseURL)
-      console.log('请求URL:', config.url)
     }
 
-    // 自动添加Cookie到请求头
-    const cookieString = cookieManager.getCookieString()
-    if (cookieString) {
-      config.headers['Cookie'] = cookieString
-      console.log('自动添加Cookie到请求:', cookieString)
-    }
+    console.log('使用withCredentials自动处理Cookie')
 
     // 可以在这里添加token等认证信息
     return config
@@ -134,11 +110,8 @@ function post(url, params, callback, others = {}) {
     ...externals,
   }
 
-  // 自动添加Cookie
-  const cookieString = cookieManager.getCookieString()
-  if (cookieString) {
-    config.headers['Cookie'] = cookieString
-  }
+  // 注意：浏览器不允许JavaScript直接设置Cookie请求头
+  // 使用withCredentials: true让浏览器自动处理Cookie
 
   if (config.headers['Content-Type']?.indexOf('x-www-form-urlencoded') !== -1) {
     params = serializeParams(params)
@@ -169,11 +142,8 @@ function get(url, params, callback, others = {}) {
     ...externals,
   }
 
-  // 自动添加Cookie
-  const cookieString = cookieManager.getCookieString()
-  if (cookieString) {
-    config.headers['Cookie'] = cookieString
-  }
+  // 注意：浏览器不允许JavaScript直接设置Cookie请求头
+  // 使用withCredentials: true让浏览器自动处理Cookie
 
   if (config.headers['Content-Type']?.indexOf('x-www-form-urlencoded') !== -1) {
     params = serializeParams(params)
@@ -213,40 +183,20 @@ export const localGet = (url, params, others) =>
   })
 
 /**
- * 获取当前代理服务器地址
- * @returns {string} 当前代理服务器地址
+ * 配置Cookie管理策略
+ * @param {Object} options - 配置选项
  */
-export const getCurrentProxyServerAddress = () => {
-  return getCurrentProxyServer()
+export const configureCookieStrategy = (options = {}) => {
+  Object.assign(COOKIE_CONFIG, options)
+  console.log('Cookie配置已更新:', COOKIE_CONFIG)
 }
 
 /**
- * 测试代理服务器连接
- * @returns {Promise<boolean>} 连接是否成功
+ * 获取当前Cookie配置
+ * @returns {Object} 当前Cookie配置
  */
-export const testProxyConnection = async () => {
-  const currentServer = getCurrentProxyServer()
-  if (!currentServer) {
-    console.log('没有配置代理服务器')
-    return false
-  }
-
-  try {
-    const baseURL = getProtocolFromTarget(currentServer)
-    console.log('测试连接:', baseURL)
-
-    // 发送一个简单的测试请求
-    const response = await AxiosRequest.get('/api/', {
-      timeout: 5000,
-      baseURL: baseURL,
-    })
-
-    console.log('连接测试成功:', response.status)
-    return true
-  } catch (error) {
-    console.error('连接测试失败:', error.message)
-    return false
-  }
+export const getCookieConfig = () => {
+  return { ...COOKIE_CONFIG }
 }
 
 // 导出axios实例

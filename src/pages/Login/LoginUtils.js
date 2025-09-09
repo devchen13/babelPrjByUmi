@@ -11,7 +11,7 @@ import cookieManager from '@/utils/cookieManager'
 class LoginUtils {
   constructor() {
     this.defaultConfig = {
-      target: globalConfig.baseUrl,
+      target: '',
       timeout: 30000,
       retryCount: 3,
       retryDelay: 1000,
@@ -70,7 +70,7 @@ class LoginUtils {
    * @param {string} target - 目标服务器地址
    * @returns {Promise<string>} 公钥字符串
    */
-  async getAsrPublicKey(target) {
+  async getAsrPublicKey() {
     try {
       console.log(`正在获取RSA公钥...`)
       const response = await localGet(
@@ -99,7 +99,6 @@ class LoginUtils {
   /**
    * 明文登录
    * @param {object} params - 登录参数
-   * @param {string} params.target - 目标服务器
    * @param {string} params.type - 登录类型 '1'=账号登录 '2'=手机登录
    * @param {string} params.tid - 企业ID
    * @param {string} params.uid - 用户名或手机号
@@ -107,7 +106,7 @@ class LoginUtils {
    * @returns {Promise<object>} 登录结果
    */
   async revealLogin(params) {
-    const { target, type, tid, uid, pwd } = params
+    const { type, tid, uid, pwd } = params
 
     const loginData = {
       'identifiers.src': 'waiqin365',
@@ -157,11 +156,11 @@ class LoginUtils {
    * @returns {Promise<object>} 登录结果
    */
   async encryptLogin(params) {
-    const { target, type, tid, uid, pwd } = params
+    const { type, tid, uid, pwd } = params
 
     try {
       // 获取RSA公钥
-      const publicKey = await this.getAsrPublicKey(target)
+      const publicKey = await this.getAsrPublicKey()
       console.log(`已获取RSA公钥: ${publicKey || '(空)'}`)
 
       // 加密密码
@@ -302,7 +301,7 @@ class LoginUtils {
       console.log('登录配置:', JSON.stringify(config, null, 2))
 
       const { params, redirectUrl } = config
-      if (!params || !params.target || !params.uid || !params.pwd) {
+      if (!params || !params.uid || !params.pwd) {
         throw new Error('登录参数不完整')
       }
 
