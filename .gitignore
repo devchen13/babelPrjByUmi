@@ -1,3 +1,4 @@
+/GlobalConfig
 /node_modules
 /.env.local
 /.umirc.local.ts
