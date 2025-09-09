@@ -41,10 +41,10 @@ const createRequestInstance = (baseURL) => {
 }
 
 // 创建默认axios实例
-const request = createRequestInstance()
+const AxiosRequest = createRequestInstance()
 
 // 请求拦截器
-request.interceptors.request.use(
+AxiosRequest.interceptors.request.use(
   (config) => {
     // 动态设置代理服务器
     const currentServer = getCurrentProxyServer()
@@ -79,7 +79,7 @@ request.interceptors.request.use(
 )
 
 // 响应拦截器
-request.interceptors.response.use(
+AxiosRequest.interceptors.response.use(
   (response) => {
     // 自动保存响应中的Cookie
     const setCookieHeaders = response.headers['set-cookie']
@@ -146,7 +146,7 @@ function post(url, params, callback, others = {}) {
     params = typeof params === 'string' ? params : JSON.stringify(params)
   }
   return new Promise((resolve, reject) => {
-    request.post(url, params, config).then(
+    AxiosRequest.post(url, params, config).then(
       (response) => {
         typeof callback === 'function' && callback(response?.data)
         resolve(response)
@@ -181,7 +181,7 @@ function get(url, params, callback, others = {}) {
     params = typeof params === 'string' ? params : JSON.stringify(params)
   }
   return new Promise((resolve, reject) => {
-    request.get(url, params, config).then(
+    AxiosRequest.get(url, params, config).then(
       (response) => {
         typeof callback === 'function' && callback(response?.data)
         resolve(response)
@@ -236,7 +236,7 @@ export const testProxyConnection = async () => {
     console.log('测试连接:', baseURL)
 
     // 发送一个简单的测试请求
-    const response = await request.get('/api/', {
+    const response = await AxiosRequest.get('/api/', {
       timeout: 5000,
       baseURL: baseURL,
     })
@@ -249,7 +249,6 @@ export const testProxyConnection = async () => {
   }
 }
 
-const AxiosRequest = request
 // 导出axios实例
 export { AxiosRequest }
 export default AxiosRequest
