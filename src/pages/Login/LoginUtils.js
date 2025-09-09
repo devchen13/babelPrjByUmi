@@ -269,7 +269,7 @@ class LoginUtils {
       }
 
       return {
-        success: true,
+        success: response.data?.status === "1",
         data: response.data,
         headers: response.headers,
       }

@@ -67,7 +67,7 @@ const Login = () => {
         message.success('登录成功！')
         console.log('登录结果:', result)
       } else {
-        message.error(`登录失败: ${result.error}`)
+        message.error(`登录失败: ${result.data.msg}`)
       }
     } catch (error) {
       message.error(`登录异常: ${error.message}`)
