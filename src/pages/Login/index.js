@@ -9,6 +9,7 @@ import LoginForm from './LoginForm'
 
 const Login = () => {
   // 使用qs获取URL中的参数
+  const enableLogin = getHashParamWithQs('login') 
   const urlTarget = getHashParamWithQs('target') ?? loginConfig.target
   const urlType = getHashParamWithQs('type') ?? loginConfig.type
   const urlTid = getHashParamWithQs('tid') ?? loginConfig.tid
@@ -93,6 +94,9 @@ const Login = () => {
     }
   }
 
+  if(!enableLogin){
+    return null
+  }
   return (
     <Spin spinning={loading}>
       <div style={{ padding: '20px', maxWidth: '400px' }}>
