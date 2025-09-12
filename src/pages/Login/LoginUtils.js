@@ -77,6 +77,7 @@ class LoginUtils {
         `/api/platform/encrypt/getPublicKey.do`,
         {},
         {
+          contentType: 'application/json;charset=utf-8',
           timeout: this.defaultConfig.timeout,
         }
       )
@@ -269,7 +270,7 @@ class LoginUtils {
       }
 
       return {
-        success: response.data?.status === "1",
+        success: response.data?.status === '1',
         data: response.data,
         headers: response.headers,
       }
@@ -403,6 +404,7 @@ class LoginUtils {
         `/api/platform/param/v1/getLoginUser.do`,
         {},
         {
+          contentType: 'application/json;charset=utf-8',
           timeout: this.defaultConfig.timeout,
           withCredentials: true,
         }
@@ -426,6 +428,7 @@ class LoginUtils {
         `/api/portal/logout.action`,
         {},
         {
+          contentType: 'application/json;charset=utf-8',
           timeout: this.defaultConfig.timeout,
           withCredentials: true,
         }

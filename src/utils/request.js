@@ -145,13 +145,22 @@ function get(url, params, callback, others = {}) {
   // 注意：浏览器不允许JavaScript直接设置Cookie请求头
   // 使用withCredentials: true让浏览器自动处理Cookie
 
-  if (config.headers['Content-Type']?.indexOf('x-www-form-urlencoded') !== -1) {
-    params = serializeParams(params)
-  } else {
-    params = typeof params === 'string' ? params : JSON.stringify(params)
+  // 对于GET请求，参数应该作为params配置项传递
+  if (params) {
+    if (
+      config.headers['Content-Type']?.indexOf('x-www-form-urlencoded') !== -1
+    ) {
+      // 对于form-urlencoded格式，将参数序列化后添加到URL
+      const serializedParams = serializeParams(params)
+      url += (url.includes('?') ? '&' : '?') + serializedParams
+    } else {
+      // 对于JSON格式，将参数作为params配置项
+      config.params = params
+    }
   }
+
   return new Promise((resolve, reject) => {
-    AxiosRequest.get(url, params, config).then(
+    AxiosRequest.get(url, config).then(
       (response) => {
         typeof callback === 'function' && callback(response?.data)
         resolve(response)
@@ -178,7 +187,6 @@ export const localPost = (url, params, others) =>
 
 export const localGet = (url, params, others) =>
   get(url, params, null, {
-    contentType: 'application/json;charset=utf-8',
     ...(others || {}),
   })
 
