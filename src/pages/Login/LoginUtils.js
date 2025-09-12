@@ -1,7 +1,7 @@
 import qs from 'qs'
 import crypto from 'crypto'
 import globalConfig from '@GlobalConfig'
-import AxiosRequest, { localGet, localPost } from '@/utils/request'
+import AxiosRequest, { fullGet, fullPost } from '@/utils/request'
 import cookieManager from '@/utils/cookieManager'
 
 /**
@@ -73,7 +73,7 @@ class LoginUtils {
   async getAsrPublicKey() {
     try {
       console.log(`正在获取RSA公钥...`)
-      const response = await localGet(
+      const response = await fullGet(
         `/api/platform/encrypt/getPublicKey.do`,
         {},
         {
@@ -120,7 +120,7 @@ class LoginUtils {
 
     try {
       console.log('执行明文登录...')
-      const response = await localPost(
+      const response = await fullPost(
         `/api/portal/logon.action`,
         qs.stringify(loginData),
         {
@@ -183,7 +183,7 @@ class LoginUtils {
 
       console.log('提交登录参数:', loginData)
 
-      const response = await localPost(`/api/portal/logon.action`, loginData, {
+      const response = await fullPost(`/api/portal/logon.action`, loginData, {
         contentType: 'application/x-www-form-urlencoded',
       })
 
@@ -400,7 +400,7 @@ class LoginUtils {
    */
   async checkLoginStatus(target) {
     try {
-      const response = await localGet(
+      const response = await fullGet(
         `/api/platform/param/v1/getLoginUser.do`,
         {},
         {
@@ -424,7 +424,7 @@ class LoginUtils {
    */
   async logout(target) {
     try {
-      await localGet(
+      await fullGet(
         `/api/portal/logout.action`,
         {},
         {

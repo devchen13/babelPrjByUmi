@@ -178,17 +178,23 @@ function serializeParams(obj) {
     .join('&')
 }
 
-export const localPost = (url, params, others) =>
+export const fullPost = (url, params, others) =>
   post(url, params, null, {
     contentType: 'application/json;charset=utf-8',
     withCredentials: true,
     ...(others || {}),
   })
 
-export const localGet = (url, params, others) =>
+export const fullGet = (url, params, others) =>
   get(url, params, null, {
     ...(others || {}),
   })
+
+export const localPost = (url, params, others) =>
+  fullPost(url, params, others).then((response) => response.data)
+
+export const localGet = (url, params, others) =>
+  fullGet(url, params, others).then((response) => response.data)
 
 /**
  * 配置Cookie管理策略
