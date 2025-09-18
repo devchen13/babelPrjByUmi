@@ -157,7 +157,7 @@ const TodoTable = ({
     {
       title: '操作',
       key: 'action',
-      width: 120,
+      width: 150,
       fixed: 'right',
       render: (_, record) => (
         <Space size='small'>
