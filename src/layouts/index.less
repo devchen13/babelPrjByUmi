@@ -1,12 +1,107 @@
-.navs {
-  ul {
-    padding: 0;
-    list-style: none;
-    display: flex;
+.nav-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.nav-item {
+  margin-right: 8px;
+
+  &:last-child {
+    margin-right: 0;
+    margin-left: auto;
   }
-  li {
-    margin-right: 1em;
+}
+
+.nav-link {
+  display: inline-block;
+  text-decoration: none;
+  color: #333;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    color: #1890ff;
+    background: rgba(24, 144, 255, 0.1);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(24, 144, 255, 0.2);
   }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
+
+  &.active-link {
+    color: #fff;
+    background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+    box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+
+    &:hover {
+      color: #fff;
+      background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+      box-shadow: 0 6px 16px rgba(24, 144, 255, 0.4);
+    }
+  }
+}
+
+.external-link {
+  display: inline-block;
+  text-decoration: none;
+  color: #333;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+
+  &:hover {
+    color: #1890ff;
+    background: rgba(24, 144, 255, 0.1);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(24, 144, 255, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.content-wrapper {
+  min-height: calc(100vh - 60px);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 // 全局工具类

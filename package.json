@@ -24,6 +24,7 @@
     "antd": "^5.22.6",
     "axios": "^1.11.0",
     "dayjs": "^1.11.13",
+    "styled-components": "^6.1.19",
     "umi": "^4.3.1"
   },
   "devDependencies": {

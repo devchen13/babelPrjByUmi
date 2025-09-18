@@ -1,0 +1,115 @@
+.page-container {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 60px);
+}
+
+.welcome-card {
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  margin-bottom: 32px;
+
+  :global(.ant-card-body) {
+    padding: 32px;
+  }
+}
+
+.feature-grid {
+  margin-top: 32px;
+}
+
+.feature-card {
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  :global(.ant-card-body) {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+}
+
+.feature-link {
+  color: #1890ff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: auto;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  display: inline-block;
+  background: linear-gradient(
+    135deg,
+    rgba(24, 144, 255, 0.1) 0%,
+    rgba(24, 144, 255, 0.05) 100%
+  );
+
+  &:hover {
+    color: #fff;
+    background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+  }
+}
+
+.feature-title {
+  :global(.ant-typography) {
+    margin-bottom: 12px;
+    color: #1f2937;
+    font-size: 18px;
+    font-weight: 600;
+  }
+}
+
+.feature-description {
+  :global(.ant-typography) {
+    color: #6b7280;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+}
+
+.welcome-title {
+  :global(.ant-typography) {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+    font-size: 32px;
+    font-weight: 700;
+  }
+}
+
+.welcome-description {
+  :global(.ant-typography) {
+    color: #4b5563;
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 0;
+  }
+}
+
+.bottom-section {
+  margin-top: 40px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}

@@ -1,11 +1,9 @@
 import { defineConfig } from 'umi'
 import globalConfig from './GlobalConfig'
+import { routes } from './routerConfig'
 
 export default defineConfig({
-  routes: [
-    { path: '/', component: 'index' },
-    { path: '/docs', component: 'docs' },
-  ],
+  routes,
   npmClient: 'npm',
   alias: {
     '@': require('path').resolve(__dirname, 'src'),
