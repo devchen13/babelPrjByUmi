@@ -42,7 +42,7 @@ class DateTimeUtils {
   /**
    * 字符串转时间戳
    * @param {string} dateString - 日期时间字符串
-   * @param {string} format - 输入格式，默认为 YYYY-MM-dd HH:mm:ss
+   * @param {string} format - 输入格式，默认为 YYYY-MM-DD HH:mm:ss
    * @returns {number} 时间戳（毫秒）
    */
   static stringToTimestamp(dateString, format = this.DEFAULT_FORMAT) {
@@ -97,7 +97,7 @@ class DateTimeUtils {
   /**
    * 解析日期时间字符串
    * @param {string} dateString - 日期时间字符串
-   * @param {string} format - 输入格式，默认为 YYYY-MM-dd HH:mm:ss
+   * @param {string} format - 输入格式，默认为 YYYY-MM-DD HH:mm:ss
    * @returns {dayjs.Dayjs} dayjs对象
    */
   static parse(dateString, format = this.DEFAULT_FORMAT) {

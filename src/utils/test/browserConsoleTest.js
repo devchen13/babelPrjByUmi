@@ -15,7 +15,7 @@ console.log('dayjs解析结果:', parsed.format())
 console.log('是否有效:', parsed.isValid())
 
 // 转换为统一格式
-const formatted = parsed.format('YYYY-MM-dd HH:mm:ss')
+const formatted = parsed.format('YYYY-MM-DD HH:mm:ss')
 console.log('转换为统一格式:', formatted)
 
 // 转换为时间戳
@@ -23,7 +23,7 @@ const timestamp = parsed.valueOf()
 console.log('转换为时间戳:', timestamp)
 
 // 时间戳转回字符串
-const backToString = dayjs(timestamp).format('YYYY-MM-dd HH:mm:ss')
+const backToString = dayjs(timestamp).format('YYYY-MM-DD HH:mm:ss')
 console.log('时间戳转回字符串:', backToString)
 
 // 2. 测试多种ISO格式
@@ -39,7 +39,7 @@ const formats = [
 formats.forEach((format, index) => {
   console.log(`\n格式 ${index + 1}: ${format}`)
   const parsed = dayjs(format)
-  console.log('解析结果:', parsed.format('YYYY-MM-dd HH:mm:ss'))
+  console.log('解析结果:', parsed.format('YYYY-MM-DD HH:mm:ss'))
   console.log('时间戳:', parsed.valueOf())
   console.log('是否有效:', parsed.isValid())
 })
@@ -50,13 +50,13 @@ const utcTime = '2025-09-12T09:24:13.000Z'
 console.log('UTC时间:', utcTime)
 
 // 转换为中国时间 (UTC+8)
-const chinaTime = dayjs(utcTime).add(8, 'hour').format('YYYY-MM-dd HH:mm:ss')
+const chinaTime = dayjs(utcTime).add(8, 'hour').format('YYYY-MM-DD HH:mm:ss')
 console.log('中国时间 (UTC+8):', chinaTime)
 
 // 转换为美国东部时间 (UTC-5)
 const eastTime = dayjs(utcTime)
   .subtract(5, 'hour')
-  .format('YYYY-MM-dd HH:mm:ss')
+  .format('YYYY-MM-DD HH:mm:ss')
 console.log('美国东部时间 (UTC-5):', eastTime)
 
 console.log('\n=== 测试完成 ===')

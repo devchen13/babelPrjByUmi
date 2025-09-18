@@ -14,7 +14,7 @@ const testISO8601Format = () => {
   console.log('是否有效:', parsed.isValid())
 
   // 2. 转换为统一格式
-  const formatted = parsed.format('YYYY-MM-dd HH:mm:ss')
+  const formatted = parsed.format('YYYY-MM-DD HH:mm:ss')
   console.log('转换为统一格式:', formatted)
 
   // 3. 转换为时间戳
@@ -22,15 +22,15 @@ const testISO8601Format = () => {
   console.log('转换为时间戳:', timestamp)
 
   // 4. 转换为本地时间
-  const localTime = parsed.format('YYYY-MM-dd HH:mm:ss')
+  const localTime = parsed.format('YYYY-MM-DD HH:mm:ss')
   console.log('本地时间格式:', localTime)
 
   // 5. 获取UTC时间
-  const utcTime = parsed.utc().format('YYYY-MM-dd HH:mm:ss')
+  const utcTime = parsed.utc().format('YYYY-MM-DD HH:mm:ss')
   console.log('UTC时间格式:', utcTime)
 
   // 6. 转换为中国时间 (UTC+8)
-  const chinaTime = parsed.add(8, 'hour').format('YYYY-MM-dd HH:mm:ss')
+  const chinaTime = parsed.add(8, 'hour').format('YYYY-MM-DD HH:mm:ss')
   console.log('中国时间 (UTC+8):', chinaTime)
 
   return {
@@ -58,7 +58,7 @@ const testMultipleISOFormats = () => {
   formats.forEach((format, index) => {
     console.log(`\n格式 ${index + 1}: ${format}`)
     const parsed = dayjs(format)
-    console.log('解析结果:', parsed.format('YYYY-MM-dd HH:mm:ss'))
+    console.log('解析结果:', parsed.format('YYYY-MM-DD HH:mm:ss'))
     console.log('时间戳:', parsed.valueOf())
     console.log('是否有效:', parsed.isValid())
   })
