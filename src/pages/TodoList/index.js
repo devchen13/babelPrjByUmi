@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import {
-  Card,
-  Input,
-  Button,
-  List,
-  Checkbox,
-  Space,
-  message,
-  Modal,
-  Form,
-} from 'antd'
-import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons'
+import { Card, Input, Button, Space, message, Modal, Form } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
 import { todoListApi } from './api'
+import TodoTable from './TodoTable'
+import {
+  TODO_STATUS,
+  getNextStatus,
+  getStatusConfig,
+  convertToNewStatus,
+} from './statusEnum'
 
 const TodoList = () => {
   const [todos, setTodos] = useState([])
@@ -20,14 +17,32 @@ const TodoList = () => {
   const [editingTodo, setEditingTodo] = useState(null)
   const [editForm] = Form.useForm()
   const [modalVisible, setModalVisible] = useState(false)
+  const [pagination, setPagination] = useState({
+    current: 1,
+    pageSize: 10,
+    total: 0,
+  })
 
   // 获取TodoList
-  const fetchTodos = async () => {
+  const fetchTodos = async (page = 1, pageSize = 10) => {
     setLoading(true)
     try {
-      const response = await todoListApi.getList({ action: 'list' })
+      const response = await todoListApi.getList({
+        page,
+        pageSize,
+        sortBy: 'createdAt',
+        sortOrder: 'asc',
+      })
       if (response.data) {
-        setTodos(response.data || [])
+        const { items = [], meta } = response.data
+        const { total = 0 } = meta
+        setTodos(items)
+        setPagination((prev) => ({
+          ...prev,
+          current: page,
+          pageSize,
+          total,
+        }))
       } else {
         message.error('获取列表失败')
       }
@@ -49,7 +64,7 @@ const TodoList = () => {
     try {
       const response = await todoListApi.addTodo({
         title: newTodo.trim(),
-        completed: false,
+        status: TODO_STATUS.PENDING, // 使用新的状态枚举
         createTime: new Date().toISOString(),
       })
 
@@ -111,12 +126,19 @@ const TodoList = () => {
     })
   }
 
-  // 切换完成状态
-  const toggleTodo = async (id, completed) => {
+  // 切换状态 - 支持三种状态循环切换
+  const toggleStatus = async (id, currentStatus) => {
     try {
-      const response = await todoListApi.toggleTodo(id, !completed)
+      // 获取下一个状态
+      const nextStatus = getNextStatus(currentStatus)
+      const currentConfig = getStatusConfig(currentStatus)
+      const nextConfig = getStatusConfig(nextStatus)
+
+      const response = await todoListApi.updateStatus(id, nextStatus)
       if (response.data) {
-        message.success('状态更新成功')
+        message.success(
+          `状态更新成功: ${currentConfig.text} → ${nextConfig.text}`
+        )
         fetchTodos()
       } else {
         message.error('状态更新失败')
@@ -135,6 +157,11 @@ const TodoList = () => {
       description: todo.description || '',
     })
     setModalVisible(true)
+  }
+
+  // 分页变化处理
+  const handlePageChange = (page, pageSize) => {
+    fetchTodos(page, pageSize)
   }
 
   // 组件挂载时获取数据
@@ -159,77 +186,15 @@ const TodoList = () => {
           </Button>
         </Space.Compact>
 
-        {/* Todo列表 */}
-        <List
-          loading={loading}
+        {/* Todo表格 */}
+        <TodoTable
           dataSource={todos}
-          renderItem={(todo) => (
-            <List.Item
-              actions={[
-                <Button
-                  key='edit'
-                  type='link'
-                  icon={<EditOutlined />}
-                  onClick={() => editTodo(todo)}
-                >
-                  编辑
-                </Button>,
-                <Button
-                  key='delete'
-                  type='link'
-                  danger
-                  icon={<DeleteOutlined />}
-                  onClick={() => deleteTodo(todo.id)}
-                >
-                  删除
-                </Button>,
-              ]}
-            >
-              <List.Item.Meta
-                avatar={
-                  <Checkbox
-                    checked={todo.completed}
-                    onChange={() => toggleTodo(todo.id, todo.completed)}
-                  />
-                }
-                title={
-                  <span
-                    style={{
-                      textDecoration: todo.completed ? 'line-through' : 'none',
-                      color: todo.completed ? '#999' : '#000',
-                    }}
-                  >
-                    {todo.title}
-                  </span>
-                }
-                description={
-                  <div>
-                    {todo.description && (
-                      <div style={{ marginTop: '4px', color: '#666' }}>
-                        {todo.description}
-                      </div>
-                    )}
-                    <div
-                      style={{
-                        marginTop: '4px',
-                        fontSize: '12px',
-                        color: '#999',
-                      }}
-                    >
-                      创建时间: {new Date(todo.createTime).toLocaleString()}
-                      {todo.updateTime && (
-                        <span>
-                          {' '}
-                          | 更新时间:{' '}
-                          {new Date(todo.updateTime).toLocaleString()}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                }
-              />
-            </List.Item>
-          )}
+          loading={loading}
+          pagination={pagination}
+          onEdit={editTodo}
+          onDelete={deleteTodo}
+          onToggle={toggleStatus}
+          onPageChange={handlePageChange}
         />
       </Card>
 

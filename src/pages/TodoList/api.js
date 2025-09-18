@@ -31,7 +31,16 @@ export const todoListApi = {
     })
   },
 
-  // 切换Todo状态
+  // 更新Todo状态 - 支持新的状态枚举
+  updateStatus: (id, status) => {
+    return localPost('/api/todolist/updateStatus.do', {
+      action: 'updateStatus',
+      id,
+      status,
+    })
+  },
+
+  // 兼容旧的状态切换方法
   toggleTodo: (id, completed) => {
     return localPost('/api/todolist/toggle.do', {
       action: 'toggle',
