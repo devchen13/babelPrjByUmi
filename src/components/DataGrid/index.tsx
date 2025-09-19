@@ -1,19 +1,23 @@
-import React, { useRef, useEffect, useState, useMemo, useCallback } from 'react'
+import { useRef, useEffect, useState, useMemo, useCallback } from 'react'
+import styled from 'styled-components'
 
-import {
-  Layout,
-  Row,
-  Col,
-  Table,
-  TableProps,
-  PaginationProps,
-  Pagination,
-} from 'antd'
+import { Table, TableProps, PaginationProps, Pagination } from 'antd'
+
+import './index.less'
 
 interface DataGridProps {
   tableProps: TableProps<any>
   pagination: PaginationProps
 }
+
+const TableContainer = styled.div<{ tableContentHeight?: number }>`
+  overflow: hidden;
+
+  .ant-table-body {
+    min-height: ${(props) =>
+      props.tableContentHeight ? `${props.tableContentHeight}px` : 'auto'};
+  }
+`
 const minHeight = 100 // 最小高度200px
 const DataGrid = (props: DataGridProps) => {
   const { pagination, tableProps } = props
@@ -92,14 +96,15 @@ const DataGrid = (props: DataGridProps) => {
   }, [calculateHeight])
 
   return (
-    <div
-      ref={containerRef}
-      style={{ height: '100%', display: 'grid', gridTemplateRows: '1fr auto' }}
-    >
-      <div style={{ overflow: 'hidden' }} ref={tableRef}>
+    <div ref={containerRef} className='data-grid-container'>
+      <TableContainer
+        className='data-grid-table-wrapper'
+        ref={tableRef}
+        tableContentHeight={tableHeight}
+      >
         <Table {...tableProps} scroll={scrollConfig} pagination={false} />
-      </div>
-      <div style={{ padding: '8px 0' }} ref={footerRef}>
+      </TableContainer>
+      <div className='data-grid-pagination-wrapper' ref={footerRef}>
         <Pagination {...pagination} />
       </div>
     </div>
