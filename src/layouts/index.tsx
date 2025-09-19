@@ -8,6 +8,7 @@ import { Layout, Menu } from 'antd'
 import '@/utils/dayjsConfig'
 import '@/styles/theme.css'
 import './index.less'
+import './baseVar.less'
 
 const { Sider, Content, Header } = Layout
 

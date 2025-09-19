@@ -1,11 +1,11 @@
 import React from 'react'
-import { Card, Typography } from 'antd'
+import { Card, Typography, Layout } from 'antd'
 
 const { Title, Paragraph } = Typography
 
 const DocsPage = () => {
   return (
-    <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
+    <Layout>
       <Card>
         <Title level={2}>项目文档</Title>
         <Paragraph>这是项目的文档页面。路由功能已经成功配置！</Paragraph>
@@ -19,7 +19,7 @@ const DocsPage = () => {
           <li>卦象 - 传统文化展示</li>
         </ul>
       </Card>
-    </div>
+    </Layout>
   )
 }
 
