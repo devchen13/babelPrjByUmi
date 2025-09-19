@@ -7,9 +7,9 @@
 
 .welcome-card {
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  border: none;
-  background: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
   backdrop-filter: blur(10px);
   margin-bottom: 32px;
 
@@ -24,16 +24,16 @@
 
 .feature-card {
   border-radius: 12px;
-  border: none;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--card-bg);
   backdrop-filter: blur(10px);
   height: 100%;
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 24px var(--shadow-color);
   }
 
   :global(.ant-card-body) {
@@ -71,7 +71,7 @@
 .feature-title {
   :global(.ant-typography) {
     margin-bottom: 12px;
-    color: #1f2937;
+    color: var(--text-primary);
     font-size: 18px;
     font-weight: 600;
   }
@@ -79,7 +79,7 @@
 
 .feature-description {
   :global(.ant-typography) {
-    color: #6b7280;
+    color: var(--text-secondary);
     margin-bottom: 16px;
     line-height: 1.6;
   }
@@ -87,7 +87,7 @@
 
 .welcome-title {
   :global(.ant-typography) {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--gradient-nav);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -99,7 +99,7 @@
 
 .welcome-description {
   :global(.ant-typography) {
-    color: #4b5563;
+    color: var(--text-secondary);
     font-size: 16px;
     line-height: 1.7;
     margin-bottom: 0;
@@ -109,7 +109,8 @@
 .bottom-section {
   margin-top: 40px;
   padding: 24px;
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--card-bg);
   border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
 }

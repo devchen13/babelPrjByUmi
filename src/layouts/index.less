@@ -5,9 +5,9 @@
   display: flex;
   align-items: center;
   padding: 12px 24px;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--nav-bg);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .nav-item {
@@ -22,7 +22,7 @@
 .nav-link {
   display: inline-block;
   text-decoration: none;
-  color: #333;
+  color: var(--nav-text);
   padding: 10px 16px;
   border-radius: 8px;
   font-weight: 500;
@@ -34,7 +34,7 @@
 
   &:hover {
     color: #1890ff;
-    background: rgba(24, 144, 255, 0.1);
+    background: var(--nav-hover-bg);
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(24, 144, 255, 0.2);
   }
@@ -64,13 +64,13 @@
   }
 
   &.active-link {
-    color: #fff;
-    background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+    color: var(--nav-active-text);
+    background: var(--nav-active-bg);
     box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
 
     &:hover {
-      color: #fff;
-      background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+      color: var(--nav-active-text);
+      background: var(--nav-active-bg);
       box-shadow: 0 6px 16px rgba(24, 144, 255, 0.4);
     }
   }
@@ -79,7 +79,7 @@
 .external-link {
   display: inline-block;
   text-decoration: none;
-  color: #333;
+  color: var(--nav-text);
   padding: 10px 16px;
   border-radius: 8px;
   font-weight: 500;
@@ -89,7 +89,7 @@
 
   &:hover {
     color: #1890ff;
-    background: rgba(24, 144, 255, 0.1);
+    background: var(--nav-hover-bg);
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(24, 144, 255, 0.2);
   }
@@ -101,7 +101,7 @@
 
 .content-wrapper {
   min-height: calc(100vh - 60px);
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: var(--gradient-bg);
 }
 
 // 全局工具类

@@ -1,5 +1,8 @@
 import React from 'react'
 import { localGet, localPost } from '@/utils/request'
+import { Layout, Row, Button } from 'antd'
+import BabelTest from './BabelTest'
+import Login from '../Login'
 
 const TestPage = () => {
   const handleClick = () => {
@@ -8,7 +11,23 @@ const TestPage = () => {
     localPost('/api/todolist/add.do', { title: 'c13@test.com' })
     // localGet('/api/users/all', {})
   }
-  return <div onClick={handleClick}>TestPage</div>
+  return (
+    <div>
+      <Row>dddd</Row>
+      <Login />
+    </div>
+  )
+  return (
+    <Layout>
+      <Row>
+        <Button onClick={handleClick}>点击</Button>
+      </Row>
+      <Row>BabelTest</Row>
+      <Row>
+        <BabelTest />
+      </Row>
+    </Layout>
+  )
 }
 
 export default TestPage

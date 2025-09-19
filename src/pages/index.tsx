@@ -1,22 +1,12 @@
-import SumOvertime from './SumOvertime'
-import Gua from './Gua'
 import { Row } from 'antd'
-import Login from './Login'
 
-import mockData from './SumOvertime/mockData'
 import { localPost } from '@utils/request'
-import TestPage from './TestPage'
-import TodoList from './TodoList'
 import './index.less'
 
 export default function HomePage() {
-  const aa = 1
-  // return <TodoList />
-  // return <TestPage />
   return (
     <div className='page-container'>
       <div className='bottom-section'>
-        <Login />
         <Row>
           <div
             onClick={() => {
@@ -40,13 +30,6 @@ export default function HomePage() {
           >
             getData
           </div>
-        </Row>
-        <Row>
-          <SumOvertime defaultData={mockData} />
-        </Row>
-
-        <Row>
-          <Gua />
         </Row>
       </div>
     </div>

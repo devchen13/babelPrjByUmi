@@ -5,9 +5,9 @@ export const routes = [
     name: '首页',
   },
   {
-    path: '/docs',
-    component: '@/pages/docs',
-    name: '文档',
+    path: '/test',
+    component: '@/pages/TestPage/index',
+    name: '测试页面Demo',
   },
   {
     path: '/login',
@@ -15,9 +15,9 @@ export const routes = [
     name: '登录',
   },
   {
-    path: '/sum-overtime',
-    component: '@/pages/SumOvertime/index',
-    name: 'static',
+    path: '/docs',
+    component: '@/pages/Docs/index',
+    name: '文档',
   },
   {
     path: '/todo-list',
@@ -25,13 +25,8 @@ export const routes = [
     name: '待办事项',
   },
   {
-    path: '/test',
-    component: '@/pages/test',
-    name: '测试页面',
-  },
-  {
-    path: '/gua',
-    component: '@/pages/Gua/index',
-    name: 'emm',
+    path: '/tools',
+    component: '@/pages/Tools/index',
+    name: '工具',
   },
 ]

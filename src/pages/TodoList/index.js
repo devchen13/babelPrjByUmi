@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { Card, Input, Button, Space, message, Modal, Form } from 'antd'
-import { PlusOutlined } from '@ant-design/icons'
-import { todoListApi } from './api'
-import TodoTable from './TodoTable'
+
 import {
   TODO_STATUS,
   getNextStatus,
   getStatusConfig,
   convertToNewStatus,
 } from './statusEnum'
+import { todoListApi } from './api'
+
+import { PlusOutlined } from '@ant-design/icons'
+import { Input, Button, Space, message, Form, Layout } from 'antd'
+import Dialog from '@components/Dialog'
+import TodoTable from './TodoTable'
 
 const TodoList = () => {
   const [todos, setTodos] = useState([])
@@ -106,7 +109,7 @@ const TodoList = () => {
 
   // 删除Todo
   const deleteTodo = async (id) => {
-    Modal.confirm({
+    Dialog.confirm({
       title: '确认删除',
       content: '确定要删除这个待办事项吗？',
       onOk: async () => {
@@ -170,36 +173,34 @@ const TodoList = () => {
   }, [])
 
   return (
-    <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
-      <Card title='TodoList 待办事项' style={{ marginBottom: '20px' }}>
-        {/* 添加新Todo */}
-        <Space.Compact style={{ width: '100%', marginBottom: '20px' }}>
-          <Input
-            placeholder='请输入待办事项'
-            value={newTodo}
-            onChange={(e) => setNewTodo(e.target.value)}
-            onPressEnter={addTodo}
-            style={{ flex: 1 }}
-          />
-          <Button type='primary' icon={<PlusOutlined />} onClick={addTodo}>
-            添加
-          </Button>
-        </Space.Compact>
-
-        {/* Todo表格 */}
-        <TodoTable
-          dataSource={todos}
-          loading={loading}
-          pagination={pagination}
-          onEdit={editTodo}
-          onDelete={deleteTodo}
-          onToggle={toggleStatus}
-          onPageChange={handlePageChange}
+    <Layout>
+      {/* 添加新Todo */}
+      <Space.Compact style={{ width: '100%', marginBottom: '20px' }}>
+        <Input
+          placeholder='请输入待办事项'
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
+          onPressEnter={addTodo}
+          style={{ flex: 1 }}
         />
-      </Card>
+        <Button type='primary' icon={<PlusOutlined />} onClick={addTodo}>
+          添加
+        </Button>
+      </Space.Compact>
+
+      {/* Todo表格 */}
+      <TodoTable
+        dataSource={todos}
+        loading={loading}
+        pagination={pagination}
+        onEdit={editTodo}
+        onDelete={deleteTodo}
+        onToggle={toggleStatus}
+        onPageChange={handlePageChange}
+      />
 
       {/* 编辑Modal */}
-      <Modal
+      <Dialog
         title='编辑待办事项'
         open={modalVisible}
         onCancel={() => {
@@ -239,8 +240,8 @@ const TodoList = () => {
             </Space>
           </Form.Item>
         </Form>
-      </Modal>
-    </div>
+      </Dialog>
+    </Layout>
   )
 }
 

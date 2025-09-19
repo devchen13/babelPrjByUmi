@@ -1,0 +1,158 @@
+/* 主题变量定义 */
+:root {
+  /* 明亮模式变量 */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-tertiary: #fafafa;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-tertiary: #999999;
+  --border-color: #e8e8e8;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --nav-bg: rgba(255, 255, 255, 0.95);
+  --nav-text: #333333;
+  --nav-active-bg: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+  --nav-active-text: #ffffff;
+  --nav-hover-bg: rgba(24, 144, 255, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --gradient-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --gradient-nav: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* 暗黑模式变量 */
+[data-theme='dark'] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #3a3a3a;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-tertiary: #999999;
+  --border-color: #404040;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --nav-bg: rgba(26, 26, 26, 0.95);
+  --nav-text: #ffffff;
+  --nav-active-bg: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+  --nav-active-text: #ffffff;
+  --nav-hover-bg: rgba(24, 144, 255, 0.2);
+  --card-bg: rgba(45, 45, 45, 0.9);
+  --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --gradient-bg: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+  --gradient-nav: linear-gradient(135deg, #4a4a4a 0%, #2d2d2d 100%);
+}
+
+/* 主题切换按钮样式 */
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  color: var(--text-primary);
+  background: var(--nav-hover-bg);
+
+  &:hover {
+    background: var(--nav-active-bg);
+    color: var(--nav-active-text);
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+/* 全局主题样式 */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* 导航栏主题样式 */
+.nav-container {
+  background: var(--gradient-nav);
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.nav-list {
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.nav-link {
+  color: var(--nav-text);
+
+  &:hover {
+    color: #1890ff;
+    background: var(--nav-hover-bg);
+  }
+
+  &.active-link {
+    color: var(--nav-active-text);
+    background: var(--nav-active-bg);
+    box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+  }
+}
+
+.external-link {
+  color: var(--nav-text);
+
+  &:hover {
+    color: #1890ff;
+    background: var(--nav-hover-bg);
+  }
+}
+
+.content-wrapper {
+  background: var(--gradient-bg);
+}
+
+/* 卡片主题样式 */
+.welcome-card,
+.feature-card {
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
+}
+
+.bottom-section {
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
+}
+
+/* 文字主题样式 */
+.welcome-title :global(.ant-typography),
+.feature-title :global(.ant-typography) {
+  color: var(--text-primary);
+}
+
+.welcome-description :global(.ant-typography),
+.feature-description :global(.ant-typography) {
+  color: var(--text-secondary);
+}
+
+/* Ant Design 组件主题覆盖 - 现在通过 ConfigProvider 处理 */
+
+/* 滚动条主题样式 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
