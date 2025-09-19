@@ -1,44 +1,74 @@
-/* 主题变量定义 */
+/* 明亮模式变量 */
 :root {
-  /* 明亮模式变量 */
+  /* 基础颜色变量 */
   --bg-primary: #ffffff;
   --bg-secondary: #f5f5f5;
-  --bg-tertiary: #fafafa;
   --text-primary: #333333;
   --text-secondary: #666666;
   --text-tertiary: #999999;
   --border-color: #e8e8e8;
   --shadow-color: rgba(0, 0, 0, 0.1);
-  --nav-bg: rgba(255, 255, 255, 0.95);
-  --nav-text: #333333;
+
+  /* 主题切换按钮变量 */
+  --nav-hover-bg: rgba(24, 144, 255, 0.1);
   --nav-active-bg: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
   --nav-active-text: #ffffff;
-  --nav-hover-bg: rgba(24, 144, 255, 0.1);
+
+  /* 卡片和内容变量 */
   --card-bg: rgba(255, 255, 255, 0.9);
   --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  --gradient-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   --gradient-nav: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+  /* Layout 和 Menu 主题色变量 */
+  --sider-bg: #ffffff;
+  --sider-header-bg: rgba(0, 0, 0, 0.1);
+  --sider-header-text: #333333;
+  --menu-bg: #ffffff;
+  --menu-hover-bg: #e6f7ff;
+  --menu-text: rgba(0, 0, 0, 0.65);
+  --menu-text-hover: #1890ff;
 }
 
 /* 暗黑模式变量 */
 [data-theme='dark'] {
+  /* 基础颜色变量 */
   --bg-primary: #1a1a1a;
   --bg-secondary: #2d2d2d;
-  --bg-tertiary: #3a3a3a;
   --text-primary: #ffffff;
   --text-secondary: #cccccc;
   --text-tertiary: #999999;
   --border-color: #404040;
   --shadow-color: rgba(0, 0, 0, 0.3);
-  --nav-bg: rgba(26, 26, 26, 0.95);
-  --nav-text: #ffffff;
+
+  /* 主题切换按钮变量 */
+  --nav-hover-bg: rgba(24, 144, 255, 0.2);
   --nav-active-bg: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
   --nav-active-text: #ffffff;
-  --nav-hover-bg: rgba(24, 144, 255, 0.2);
+
+  /* 卡片和内容变量 */
   --card-bg: rgba(45, 45, 45, 0.9);
   --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-  --gradient-bg: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
   --gradient-nav: linear-gradient(135deg, #4a4a4a 0%, #2d2d2d 100%);
+
+  /* Layout 和 Menu 主题色变量 */
+  --sider-bg: #141414;
+  --sider-header-bg: rgba(255, 255, 255, 0.2);
+  --sider-header-text: #ffffff;
+  --menu-bg: #1f1f1f;
+  --menu-hover-bg: #2d2d2d;
+  --menu-text: rgba(255, 255, 255, 0.65);
+  --menu-text-hover: #ffffff;
+}
+
+/* Body 主题类样式 */
+.theme-dark {
+  background-color: #141414;
+  color: #ffffff;
+}
+
+.theme-light {
+  background-color: #f5f5f5;
+  color: #333333;
 }
 
 /* 主题切换按钮样式 */
@@ -66,75 +96,13 @@
 
 /* 全局主题样式 */
 body {
+  margin: 0;
+  padding: 0;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
-}
-
-/* 导航栏主题样式 */
-.nav-container {
-  background: var(--gradient-nav);
-  box-shadow: 0 2px 8px var(--shadow-color);
-}
-
-.nav-list {
-  background: var(--nav-bg);
-  border-bottom: 1px solid var(--border-color);
-}
-
-.nav-link {
-  color: var(--nav-text);
-
-  &:hover {
-    color: #1890ff;
-    background: var(--nav-hover-bg);
-  }
-
-  &.active-link {
-    color: var(--nav-active-text);
-    background: var(--nav-active-bg);
-    box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
-  }
-}
-
-.external-link {
-  color: var(--nav-text);
-
-  &:hover {
-    color: #1890ff;
-    background: var(--nav-hover-bg);
-  }
-}
-
-.content-wrapper {
-  background: var(--gradient-bg);
-}
-
-/* 卡片主题样式 */
-.welcome-card,
-.feature-card {
-  background: var(--card-bg);
-  box-shadow: var(--card-shadow);
-  border: 1px solid var(--border-color);
-}
-
-.bottom-section {
-  background: var(--card-bg);
-  box-shadow: var(--card-shadow);
-  border: 1px solid var(--border-color);
-}
-
-/* 文字主题样式 */
-.welcome-title :global(.ant-typography),
-.feature-title :global(.ant-typography) {
-  color: var(--text-primary);
-}
-
-.welcome-description :global(.ant-typography),
-.feature-description :global(.ant-typography) {
-  color: var(--text-secondary);
 }
 
 /* Ant Design 组件主题覆盖 - 现在通过 ConfigProvider 处理 */
@@ -155,4 +123,128 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-tertiary);
+}
+
+/* 强制覆盖 Ant Design Sider 样式 - 最高优先级 */
+.ant-layout-sider,
+.ant-layout-sider-light,
+.ant-layout-sider-dark,
+.ant-layout-sider-collapsed {
+  background: var(--sider-bg) !important;
+}
+
+.theme-light .ant-layout-sider,
+.theme-light .ant-layout-sider-light,
+.theme-light .ant-layout-sider-dark,
+.theme-light .ant-layout-sider-collapsed {
+  background: var(--sider-bg) !important;
+}
+
+.theme-dark .ant-layout-sider,
+.theme-dark .ant-layout-sider-light,
+.theme-dark .ant-layout-sider-dark,
+.theme-dark .ant-layout-sider-collapsed {
+  background: var(--sider-bg) !important;
+}
+
+/* 强制覆盖 Ant Design Menu 样式 - 最高优先级 */
+.ant-menu,
+.ant-menu-dark,
+.ant-menu-light,
+.ant-menu-inline,
+.ant-menu-vertical,
+.ant-menu-horizontal {
+  background: var(--menu-bg) !important;
+}
+
+.ant-menu-dark,
+.ant-menu-dark > .ant-menu {
+  background: var(--menu-bg) !important;
+}
+
+.ant-menu-dark .ant-menu-item,
+.ant-menu-dark .ant-menu-submenu-title {
+  color: var(--menu-text) !important;
+}
+
+.ant-menu-dark .ant-menu-item:hover,
+.ant-menu-dark .ant-menu-submenu-title:hover {
+  color: var(--menu-text-hover) !important;
+  background-color: var(--menu-hover-bg) !important;
+}
+
+.ant-menu-dark .ant-menu-item-selected,
+.ant-menu-dark .ant-menu-submenu-selected > .ant-menu-submenu-title {
+  color: var(--menu-text-hover) !important;
+  background-color: var(--menu-hover-bg) !important;
+}
+
+/* 明亮模式 Menu 样式 */
+.theme-light .ant-menu,
+.theme-light .ant-menu-dark,
+.theme-light .ant-menu-light,
+.theme-light .ant-menu-inline,
+.theme-light .ant-menu-vertical,
+.theme-light .ant-menu-horizontal {
+  background: var(--menu-bg) !important;
+}
+
+.theme-light .ant-menu-dark,
+.theme-light .ant-menu-dark > .ant-menu {
+  background: var(--menu-bg) !important;
+}
+
+.theme-light .ant-menu-dark .ant-menu-item,
+.theme-light .ant-menu-dark .ant-menu-submenu-title {
+  color: var(--menu-text) !important;
+}
+
+.theme-light .ant-menu-dark .ant-menu-item:hover,
+.theme-light .ant-menu-dark .ant-menu-submenu-title:hover {
+  color: var(--menu-text-hover) !important;
+  background-color: var(--menu-hover-bg) !important;
+}
+
+.theme-light .ant-menu-dark .ant-menu-item-selected,
+.theme-light
+  .ant-menu-dark
+  .ant-menu-submenu-selected
+  > .ant-menu-submenu-title {
+  color: var(--menu-text-hover) !important;
+  background-color: var(--menu-hover-bg) !important;
+}
+
+/* 暗黑模式 Menu 样式 */
+.theme-dark .ant-menu,
+.theme-dark .ant-menu-dark,
+.theme-dark .ant-menu-light,
+.theme-dark .ant-menu-inline,
+.theme-dark .ant-menu-vertical,
+.theme-dark .ant-menu-horizontal {
+  background: var(--menu-bg) !important;
+}
+
+.theme-dark .ant-menu-dark,
+.theme-dark .ant-menu-dark > .ant-menu {
+  background: var(--menu-bg) !important;
+}
+
+.theme-dark .ant-menu-dark .ant-menu-item,
+.theme-dark .ant-menu-dark .ant-menu-submenu-title {
+  color: var(--menu-text) !important;
+}
+
+.theme-dark .ant-menu-dark .ant-menu-item:hover,
+.theme-dark .ant-menu-dark .ant-menu-submenu-title:hover {
+  color: var(--menu-text-hover) !important;
+  background-color: var(--menu-hover-bg) !important;
+}
+
+.theme-dark .ant-menu-dark .ant-menu-item-selected,
+.theme-dark
+  .ant-menu-dark
+  .ant-menu-submenu-selected
+  > .ant-menu-submenu-title {
+  color: var(--menu-text-hover) !important;
+  background-color: var(--menu-hover-bg) !important;
 }

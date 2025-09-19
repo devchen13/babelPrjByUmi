@@ -1,5 +1,12 @@
 import React from 'react'
-import { Table, Button, Tag, Space, Tooltip } from 'antd'
+
+import {
+  TODO_STATUS,
+  getStatusConfig,
+  getNextStatus,
+  convertToNewStatus,
+} from './statusEnum'
+
 import {
   EditOutlined,
   DeleteOutlined,
@@ -7,13 +14,9 @@ import {
   ClockCircleOutlined,
   ExclamationCircleOutlined,
 } from '@ant-design/icons'
+import { Button, Space, Tooltip } from 'antd'
 import DateTimeUtils from '@/utils/dateTimeUtils'
-import {
-  TODO_STATUS,
-  getStatusConfig,
-  getNextStatus,
-  convertToNewStatus,
-} from './statusEnum'
+import DataGrid from '@components/DataGrid'
 
 const TodoTable = ({
   dataSource = [],
@@ -184,11 +187,7 @@ const TodoTable = ({
   ]
 
   return (
-    <Table
-      columns={columns}
-      dataSource={dataSource}
-      loading={loading}
-      rowKey='id'
+    <DataGrid
       pagination={{
         current: pagination.current || 1,
         pageSize: pagination.pageSize || 10,
@@ -201,8 +200,14 @@ const TodoTable = ({
         onChange: onPageChange,
         onShowSizeChange: onPageChange,
       }}
-      scroll={{ x: 900 }}
-      size='middle'
+      tableProps={{
+        columns,
+        dataSource,
+        loading,
+        rowKey: 'id',
+        scroll: { x: 900 },
+        size: 'middle',
+      }}
     />
   )
 }

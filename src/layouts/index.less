@@ -1,110 +1,162 @@
-.nav-list {
-  padding: 0;
-  margin: 0;
-  list-style: none;
+// 布局样式
+.layout-container {
+  max-height: 100vh;
+}
+
+.header-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 24px;
+  // Ant Design 主题系统会自动处理背景色和边框
+}
+
+// 强制覆盖 Ant Design 的 Sider 样式
+:global(.ant-layout-sider),
+:global(.ant-layout-sider-light),
+:global(.ant-layout-sider-dark),
+:global(.ant-layout-sider-collapsed),
+:global(.theme-light .ant-layout-sider),
+:global(.theme-light .ant-layout-sider-light),
+:global(.theme-light .ant-layout-sider-dark),
+:global(.theme-light .ant-layout-sider-collapsed),
+:global(.theme-dark .ant-layout-sider),
+:global(.theme-dark .ant-layout-sider-light),
+:global(.theme-dark .ant-layout-sider-dark),
+:global(.theme-dark .ant-layout-sider-collapsed) {
+  background: var(--sider-bg) !important;
+}
+
+// 强制覆盖 Ant Design 的 Menu 样式
+:global(.ant-menu),
+:global(.ant-menu-dark),
+:global(.ant-menu-light),
+:global(.ant-menu-inline),
+:global(.ant-menu-vertical),
+:global(.ant-menu-horizontal),
+:global(.theme-light .ant-menu),
+:global(.theme-light .ant-menu-dark),
+:global(.theme-light .ant-menu-light),
+:global(.theme-light .ant-menu-inline),
+:global(.theme-light .ant-menu-vertical),
+:global(.theme-light .ant-menu-horizontal),
+:global(.theme-dark .ant-menu),
+:global(.theme-dark .ant-menu-dark),
+:global(.theme-dark .ant-menu-light),
+:global(.theme-dark .ant-menu-inline),
+:global(.theme-dark .ant-menu-vertical),
+:global(.theme-dark .ant-menu-horizontal) {
+  background: var(--menu-bg) !important;
+}
+
+:global(.ant-menu-dark),
+:global(.ant-menu-dark > .ant-menu),
+:global(.theme-light .ant-menu-dark),
+:global(.theme-light .ant-menu-dark > .ant-menu),
+:global(.theme-dark .ant-menu-dark),
+:global(.theme-dark .ant-menu-dark > .ant-menu) {
+  background: var(--menu-bg) !important;
+}
+
+:global(.ant-menu-dark .ant-menu-item),
+:global(.ant-menu-dark .ant-menu-submenu-title),
+:global(.theme-light .ant-menu-dark .ant-menu-item),
+:global(.theme-light .ant-menu-dark .ant-menu-submenu-title),
+:global(.theme-dark .ant-menu-dark .ant-menu-item),
+:global(.theme-dark .ant-menu-dark .ant-menu-submenu-title) {
+  color: var(--menu-text) !important;
+}
+
+:global(.ant-menu-dark .ant-menu-item:hover),
+:global(.ant-menu-dark .ant-menu-submenu-title:hover),
+:global(.theme-light .ant-menu-dark .ant-menu-item:hover),
+:global(.theme-light .ant-menu-dark .ant-menu-submenu-title:hover),
+:global(.theme-dark .ant-menu-dark .ant-menu-item:hover),
+:global(.theme-dark .ant-menu-dark .ant-menu-submenu-title:hover) {
+  color: var(--menu-text-hover) !important;
+  background-color: var(--menu-hover-bg) !important;
+}
+
+:global(.ant-menu-dark .ant-menu-item-selected),
+:global(.ant-menu-dark .ant-menu-submenu-selected > .ant-menu-submenu-title),
+:global(.theme-light .ant-menu-dark .ant-menu-item-selected),
+:global(
+  .theme-light
+    .ant-menu-dark
+    .ant-menu-submenu-selected
+    > .ant-menu-submenu-title
+),
+:global(.theme-dark .ant-menu-dark .ant-menu-item-selected),
+:global(
+  .theme-dark
+    .ant-menu-dark
+    .ant-menu-submenu-selected
+    > .ant-menu-submenu-title
+) {
+  color: var(--menu-text-hover) !important;
+  background-color: var(--menu-hover-bg) !important;
+}
+
+.sider-header {
+  height: 32px;
+  margin: 16px;
+  background: var(--sider-header-bg);
+  border-radius: 6px;
   display: flex;
   align-items: center;
-  padding: 12px 24px;
-  background: var(--nav-bg);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border-color);
+  justify-content: center;
+  color: var(--sider-header-text);
+  font-size: 16px;
+  font-weight: bold;
 }
 
-.nav-item {
-  margin-right: 8px;
-
-  &:last-child {
-    margin-right: 0;
-    margin-left: auto;
-  }
-}
-
-.nav-link {
-  display: inline-block;
-  text-decoration: none;
-  color: var(--nav-text);
-  padding: 10px 16px;
+.content-container {
+  margin: 24px 16px;
+  padding: 24px;
+  background: var(--bg-primary);
+  min-height: 280px;
   border-radius: 8px;
-  font-weight: 500;
-  font-size: 14px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background: transparent;
-  position: relative;
-  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+// 主题相关样式
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 
   &:hover {
-    color: #1890ff;
     background: var(--nav-hover-bg);
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(24, 144, 255, 0.2);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.2),
-      transparent
-    );
-    transition: left 0.5s;
-  }
-
-  &:hover::before {
-    left: 100%;
-  }
-
-  &.active-link {
-    color: var(--nav-active-text);
-    background: var(--nav-active-bg);
-    box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
-
-    &:hover {
-      color: var(--nav-active-text);
-      background: var(--nav-active-bg);
-      box-shadow: 0 6px 16px rgba(24, 144, 255, 0.4);
-    }
   }
 }
 
-.external-link {
-  display: inline-block;
-  text-decoration: none;
-  color: var(--nav-text);
-  padding: 10px 16px;
-  border-radius: 8px;
-  font-weight: 500;
-  font-size: 14px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background: transparent;
-
-  &:hover {
-    color: #1890ff;
-    background: var(--nav-hover-bg);
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(24, 144, 255, 0.2);
+// 响应式设计
+@media (max-width: 768px) {
+  .sider-container {
+    width: 200px !important;
   }
 
-  &:active {
-    transform: translateY(0);
+  .content-container {
+    margin: 16px 8px;
+    padding: 16px;
   }
 }
 
-.content-wrapper {
-  min-height: calc(100vh - 60px);
-  background: var(--gradient-bg);
-}
+@media (max-width: 576px) {
+  .header-container {
+    padding: 0 16px;
+  }
 
-// 全局工具类
-.flex-1 {
-  flex: 1;
+  .sider-container {
+    width: 180px !important;
+  }
+
+  .content-container {
+    margin: 8px 4px;
+    padding: 12px;
+  }
 }

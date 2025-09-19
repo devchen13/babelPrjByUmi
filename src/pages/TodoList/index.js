@@ -187,17 +187,18 @@ const TodoList = () => {
           添加
         </Button>
       </Space.Compact>
-
-      {/* Todo表格 */}
-      <TodoTable
-        dataSource={todos}
-        loading={loading}
-        pagination={pagination}
-        onEdit={editTodo}
-        onDelete={deleteTodo}
-        onToggle={toggleStatus}
-        onPageChange={handlePageChange}
-      />
+      <Layout.Content>
+        {/* Todo表格 */}
+        <TodoTable
+          dataSource={todos}
+          loading={loading}
+          pagination={pagination}
+          onEdit={editTodo}
+          onDelete={deleteTodo}
+          onToggle={toggleStatus}
+          onPageChange={handlePageChange}
+        />
+      </Layout.Content>
 
       {/* 编辑Modal */}
       <Dialog

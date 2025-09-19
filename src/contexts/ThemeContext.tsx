@@ -47,41 +47,39 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
       theme === 'dark' ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
     token: {
       colorPrimary: '#1890ff',
-      colorBgBase: theme === 'dark' ? '#1a1a1a' : '#ffffff',
-      colorTextBase: theme === 'dark' ? '#ffffff' : '#333333',
-      colorBgContainer: theme === 'dark' ? '#2d2d2d' : '#ffffff',
-      colorBorder: theme === 'dark' ? '#404040' : '#e8e8e8',
-      colorText: theme === 'dark' ? '#ffffff' : '#333333',
-      colorTextSecondary: theme === 'dark' ? '#cccccc' : '#666666',
-      colorTextTertiary: theme === 'dark' ? '#999999' : '#999999',
-      colorBgElevated: theme === 'dark' ? '#3a3a3a' : '#ffffff',
-      colorBgLayout: theme === 'dark' ? '#1a1a1a' : '#f5f5f5',
-      colorBgSpotlight: theme === 'dark' ? '#2d2d2d' : '#fafafa',
-      colorBgMask:
-        theme === 'dark' ? 'rgba(0, 0, 0, 0.8)' : 'rgba(0, 0, 0, 0.45)',
-      boxShadow:
-        theme === 'dark'
-          ? '0 6px 16px 0 rgba(0, 0, 0, 0.3), 0 3px 6px -4px rgba(0, 0, 0, 0.2), 0 9px 28px 8px rgba(0, 0, 0, 0.1)'
-          : '0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05)',
+      colorBgBase: theme === 'dark' ? '#141414' : '#ffffff',
+      colorTextBase: theme === 'dark' ? '#ffffff' : '#000000',
+      colorBgContainer: theme === 'dark' ? '#1f1f1f' : '#ffffff',
+      colorBgLayout: theme === 'dark' ? '#141414' : '#f5f5f5',
+      colorText: theme === 'dark' ? '#ffffff' : '#000000',
+      colorTextSecondary: theme === 'dark' ? '#a6a6a6' : '#00000073',
+      colorBorder: theme === 'dark' ? '#424242' : '#d9d9d9',
     },
     components: {
-      Card: {
-        colorBgContainer: theme === 'dark' ? '#2d2d2d' : '#ffffff',
-        colorBorderSecondary: theme === 'dark' ? '#404040' : '#e8e8e8',
-      },
-      Button: {
-        colorPrimary: '#1890ff',
-        colorPrimaryHover: '#40a9ff',
-        colorPrimaryActive: '#096dd9',
-      },
-      Input: {
-        colorBgContainer: theme === 'dark' ? '#2d2d2d' : '#ffffff',
-        colorBorder: theme === 'dark' ? '#404040' : '#d9d9d9',
-        colorText: theme === 'dark' ? '#ffffff' : '#333333',
-      },
-      Typography: {
-        colorText: theme === 'dark' ? '#ffffff' : '#333333',
-        colorTextSecondary: theme === 'dark' ? '#cccccc' : '#666666',
+      Layout: {
+        // Header 相关配置
+        headerBg: theme === 'dark' ? '#1f1f1f' : '#ffffff',
+        headerColor: theme === 'dark' ? '#ffffff' : 'rgba(0, 0, 0, 0.88)',
+        headerHeight: 64,
+        headerPadding: '0 50px',
+
+        // Sider 相关配置
+        siderBg: theme === 'dark' ? '#001529' : '#ffffff',
+        lightSiderBg: '#ffffff',
+
+        // Trigger 相关配置
+        triggerBg: theme === 'dark' ? '#002140' : '#ffffff',
+        triggerColor: theme === 'dark' ? '#fff' : 'rgba(0, 0, 0, 0.88)',
+        lightTriggerBg: '#ffffff',
+        lightTriggerColor: 'rgba(0, 0, 0, 0.88)',
+        triggerHeight: 48,
+        zeroTriggerHeight: 40,
+        zeroTriggerWidth: 40,
+
+        // Body 和 Footer 相关配置
+        bodyBg: theme === 'dark' ? '#141414' : '#f5f5f5',
+        footerBg: theme === 'dark' ? '#141414' : '#f5f5f5',
+        footerPadding: '24px 50px',
       },
     },
   }
