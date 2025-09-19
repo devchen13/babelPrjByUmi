@@ -10,7 +10,9 @@ interface DataGridProps {
   pagination: PaginationProps
 }
 
-const TableContainer = styled.div<{ tableContentHeight?: number }>`
+const TableContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'tableContentHeight',
+})<{ tableContentHeight?: number }>`
   overflow: hidden;
 
   .ant-table-body {
